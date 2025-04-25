@@ -1,0 +1,54 @@
+ER - diagram link and code ----- https://dbdiagram.io/d/680b50121ca52373f554e708
+
+
+
+code Table Users {
+  UserID int [pk, increment]
+  Username varchar(50) [not null, unique]
+  Email varchar(100) [not null, unique]
+  Full_Name varchar(100)
+  Bio text
+  Registration_Date date
+}
+
+Table Posts {
+  PostID int [pk, increment]
+  UserID int [ref: > Users.UserID]
+  Caption text
+  Image_URL varchar(255)
+  Location varchar(100)
+  Post_Date datetime
+}
+
+Table Comments {
+  CommentID int [pk, increment]
+  PostID int [ref: > Posts.PostID]
+  UserID int [ref: > Users.UserID]
+  Text text
+  Comment_Date datetime
+}
+
+Table Likes {
+  LikeID int [pk, increment]
+  PostID int [ref: > Posts.PostID]
+  UserID int [ref: > Users.UserID]
+  Like_Date datetime
+}
+
+Table Followers {
+  FollowerID int [pk, increment]
+  FollowingUserID int [ref: > Users.UserID]
+  FollowerUserID int [ref: > Users.UserID]
+  Follow_Date datetime
+}
+
+Table Hashtags {
+  HashtagID int [pk, increment]
+  Tag varchar(50) [not null, unique]
+}
+
+Table PostHashtags {
+  PostHashtagID int [pk, increment]
+  PostID int [ref: > Posts.PostID]
+  HashtagID int [ref: > Hashtags.HashtagID]
+}
